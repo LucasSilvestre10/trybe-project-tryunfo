@@ -13,14 +13,60 @@ class App extends React.Component {
     cardRare: '',
     cardTrunfo: false,
     // hasTrunfo,
+    // isErrorForm: true,
+    isSaveButtonDisabled: true,
+  };
+
+  validateForm = () => {
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+    } = this.state;
+    const cardA1 = parseInt(cardAttr1, 10);
+    const cardA2 = parseInt(cardAttr2, 10);
+    const cardA3 = parseInt(cardAttr3, 10);
+    const totalPower = cardA1 + cardA2 + cardA3;
+    const maxAttr = 90;
+    const maxPower = 210;
+    let error = 0;
+
+    if (cardName.length <= 0) {
+      error += 1;
+    } if (cardDescription.length <= 0) {
+      error += 1;
+    } if (cardDescription.length <= 0) {
+      error += 1;
+    } if (cardImage.length <= 0) {
+      error += 1;
+    } if (cardRare.length <= 0) {
+      error += 1;
+    } if (cardA1 < 0 || cardA1 > maxAttr) {
+      error += 1;
+    } if (cardA2 < 0 || cardA2 > maxAttr) {
+      error += 1;
+    } if (cardA3 < 0 || cardA3 > maxAttr) {
+      error += 1;
+    } if (totalPower > maxPower) {
+      error += 1;
+    }
+    if (error === 0) {
+      this.setState({ isSaveButtonDisabled: false });
+    } if (error >= 1) {
+      this.setState({ isSaveButtonDisabled: true });
+    }
   };
 
   onInputChange = (event) => {
     const { name, value, checked } = event.target;
     if (name === 'cardTrunfo') {
-      this.setState({ [name]: checked });
+      this.setState({ [name]: checked }, this.validateForm);
     } else {
-      this.setState({ [name]: value });
+      this.setState({ [name]: value }, this.validateForm);
     }
   };
 
@@ -34,6 +80,7 @@ class App extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      isSaveButtonDisabled,
     } = this.state;
     return (
       <div>
@@ -48,6 +95,8 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
           onInputChange={ this.onInputChange }
+          validateForm={ this.validateForm }
+          isSaveButtonDisabled={ isSaveButtonDisabled }
         />
         <Card
           cardName={ cardName }
