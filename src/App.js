@@ -13,8 +13,8 @@ class App extends React.Component {
     cardRare: '',
     cardTrunfo: false,
     // hasTrunfo,
-    // isErrorForm: true,
     isSaveButtonDisabled: true,
+    cardList: [],
   };
 
   validateForm = () => {
@@ -70,6 +70,47 @@ class App extends React.Component {
     }
   };
 
+  clearForm = () => {
+    this.setState({
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardImage: '',
+      cardRare: 'normal',
+      cardTrunfo: false,
+    });
+  };
+
+  saveCard = () => {
+    const { cardList,
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare } = this.state;
+    const obj = {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+    };
+
+    cardList.push(obj);
+    this.setState({ cardList });
+  };
+
+  onSaveButtonClick = () => {
+    this.saveCard();
+    this.clearForm();
+  };
+
   render() {
     const {
       cardName,
@@ -97,6 +138,7 @@ class App extends React.Component {
           onInputChange={ this.onInputChange }
           validateForm={ this.validateForm }
           isSaveButtonDisabled={ isSaveButtonDisabled }
+          onSaveButtonClick={ this.onSaveButtonClick }
         />
         <Card
           cardName={ cardName }

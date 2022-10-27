@@ -83,6 +83,7 @@ class Form extends Component {
               value={ cardRare }
               onChange={ onInputChange }
             >
+              <option value="">Selecione a Raridade</option>
               <option value="normal">Normal</option>
               <option value="raro">Raro</option>
               <option value="muito raro">Muito Raro</option>
@@ -102,7 +103,7 @@ class Form extends Component {
           <button
             disabled={ isSaveButtonDisabled }
             onClick={ onSaveButtonClick }
-            type="submit"
+            type="button"
             id="save-button"
             data-testid="save-button"
           >
