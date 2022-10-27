@@ -26,6 +26,7 @@ class Form extends Component {
               type="text"
               data-testid="name-input"
               placeholder="Insira o nome da carta"
+              name="cardName"
               value={ cardName }
               onChange={ onInputChange }
             />
@@ -34,6 +35,7 @@ class Form extends Component {
             <input
               type="textarea"
               data-testid="description-input"
+              name="cardDescription"
               value={ cardDescription }
               onChange={ onInputChange }
             />
@@ -42,6 +44,7 @@ class Form extends Component {
             <input
               type="number"
               data-testid="attr1-input"
+              name="cardAttr1"
               value={ cardAttr1 }
               onChange={ onInputChange }
             />
@@ -50,6 +53,7 @@ class Form extends Component {
             <input
               type="number"
               data-testid="attr2-input"
+              name="cardAttr2"
               value={ cardAttr2 }
               onChange={ onInputChange }
             />
@@ -58,6 +62,7 @@ class Form extends Component {
             <input
               type="number"
               data-testid="attr3-input"
+              name="cardAttr3"
               value={ cardAttr3 }
               onChange={ onInputChange }
             />
@@ -66,6 +71,7 @@ class Form extends Component {
             <input
               type="text"
               data-testid="image-input"
+              name="cardImage"
               value={ cardImage }
               onChange={ onInputChange }
             />
@@ -73,6 +79,7 @@ class Form extends Component {
           <label htmlFor="rare-input">
             <select
               data-testid="rare-input"
+              name="cardRare"
               value={ cardRare }
               onChange={ onInputChange }
             >
@@ -83,10 +90,10 @@ class Form extends Component {
           </label>
           <label htmlFor="input-trunfo">
             <input
+              name="cardTrunfo"
               checked={ cardTrunfo }
               onChange={ onInputChange }
               type="checkbox"
-              name=""
               id="input-trunfo"
               data-testid="trunfo-input"
             />
