@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import './Style.css';
 
 class App extends React.Component {
   state = {
@@ -116,6 +117,8 @@ class App extends React.Component {
       const result = list.some((card) => card.cardTrunfo === true);
       if (result === true) {
         this.setState({ hasTrunfo: true });
+      } else {
+        this.setState({ hasTrunfo: false });
       }
     }
   };
@@ -126,9 +129,13 @@ class App extends React.Component {
     this.hasTrunfo();
   };
 
-  /* componentDidMount() {
-    hasTrunfo();
-  } */
+  deleteCard = (e) => {
+    const { cardList } = this.state;
+    const cardDelete = e.target.parentElement.id;
+    const newList = cardList.filter((card) => card.cardName !== cardDelete);
+    this.setState({ cardList: newList }, this.hasTrunfo);
+    console.log(newList);
+  };
 
   render() {
     const {
@@ -162,19 +169,21 @@ class App extends React.Component {
           onSaveButtonClick={ this.onSaveButtonClick }
           hasTrunfo={ hasTrunfo }
         />
-        <Card
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          onInputChange={ this.onInputChange }
-          hasTrunfo={ hasTrunfo }
-        />
-        <div htmlFor="card-list">
+        <ul htmlFor="card-preview">
+          <Card
+            cardName={ cardName }
+            cardDescription={ cardDescription }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardImage={ cardImage }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+            onInputChange={ this.onInputChange }
+            hasTrunfo={ hasTrunfo }
+          />
+        </ul>
+        <ul htmlFor="card-list">
           {cardList.map((card) => (
             <Card
               key={ card.cardName }
@@ -186,9 +195,10 @@ class App extends React.Component {
               cardImage={ card.cardImage }
               cardRare={ card.cardRare }
               cardTrunfo={ card.cardTrunfo }
+              deleteCard={ this.deleteCard }
             />
           ))}
-        </div>
+        </ul>
       </div>
     );
   }

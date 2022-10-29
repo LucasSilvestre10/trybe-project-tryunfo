@@ -111,9 +111,7 @@ class Form extends Component {
           </label>
           <label htmlFor="input-trunfo">
             {hasTrunfo ? trunfo : inputTrunfo}
-
           </label>
-
           <button
             disabled={ isSaveButtonDisabled }
             onClick={ onSaveButtonClick }
@@ -139,7 +137,7 @@ Form.propTypes = {
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
   isSaveButtonDisabled: PropTypes.bool.isRequired,
-  hasTrunfo: PropTypes.func.isRequired,
+  hasTrunfo: PropTypes.bool.isRequired,
   onInputChange: PropTypes.func.isRequired,
   onSaveButtonClick: PropTypes.func.isRequired,
 };
